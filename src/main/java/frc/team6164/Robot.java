@@ -7,46 +7,77 @@
 
 package frc.team6164;
 
+import edu.wpi.first.cameraserver.*;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.*;
-import com.ctre.phoenix.motorcontrol
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 
 public class Robot extends IterativeRobot {
 	
-	Joystick stick;
-	SpeedController motor;
+    Joystick controller;
+    SpeedController BL;
+    SpeedController BR;
+    SpeedController FR;
+    SpeedController FL;
+    MecanumDrive drive;
 	
+    @Override
     public void robotInit() {
-    	
-        stick = new Joystick(0);
-        motor = new WPI_TalonSRX(2);
+      
+        controller = new Joystick(0);
+
+        BL= new WPI_TalonSRX(1);
+        BR= new WPI_TalonSRX(2);
+	    FR= new WPI_TalonSRX(3);
+	    FL= new WPI_TalonSRX(4);
+                                			//the WPI_TalonSRX is a type for wpi (is considered a SpeedController object
+                                      //the regular TalonSRX is not meant for wpi use so is not a SpeedController object    
+      drive = new MecanumDrive(FL, BL, FR, BR); 
+      
+      CameraServer.getInstance().startAutomaticCapture("cam0",0);
     }
 
-     
-    public void disabledInit() { }
+    @Override
+    public void disabledInit() { 
 
-     
-    public void autonomousInit() { }
+    }
 
-     
-    public void teleopInit() { }
+    @Override
+    public void autonomousInit() { 
 
-     
-    public void testInit() { }
+    }
+
+    @Override
+    public void teleopInit() { 
+
+    }
+
+    @Override
+    public void testInit() { 
+
+    }
 
 
-     
-    public void disabledPeriodic() { }
+    @Override
+    public void disabledPeriodic() { 
+
+    }
     
-     
-    public void autonomousPeriodic() { }
+    @Override
+    public void autonomousPeriodic() { 
 
-     
-    public void teleopPeriodic() { 
-    	
-    	 double speed=stick.getY();
-    	    motor.set(speed);
     }
 
-     
-    public void testPeriodic() { }
+    @Override
+    public void teleopPeriodic() { 
+      drive.driveCartesian(controller.getX(), controller.getY(), controller.getRawAxis(4));
+    }
+
+    @Override
+    public void testPeriodic() { 
+
+    }
 }
