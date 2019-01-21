@@ -7,7 +7,6 @@
 
 package frc.team6164;
 
-import edu.wpi.first.cameraserver.*;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
@@ -15,7 +14,7 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 
-public class Robot extends IterativeRobot {
+public class Robot extends TimedRobot {
 	
     Joystick controller;
     SpeedController BL;
