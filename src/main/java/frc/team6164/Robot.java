@@ -28,13 +28,14 @@ public class Robot extends TimedRobot {
       
         controller = new Joystick(0);
 
-        BL= new WPI_TalonSRX(1);
-        BR= new WPI_TalonSRX(2);
+      BL= new WPI_TalonSRX(1);
+      BR= new WPI_TalonSRX(2);
 	    FR= new WPI_TalonSRX(3);
 	    FL= new WPI_TalonSRX(4);
                                 			//the WPI_TalonSRX is a type for wpi (is considered a SpeedController object
                                       //the regular TalonSRX is not meant for wpi use so is not a SpeedController object    
       drive = new MecanumDrive(FL, BL, FR, BR); 
+      drive.setSafetyEnabled(false);
       
       CameraServer.getInstance().startAutomaticCapture("cam0",0);
     }
@@ -72,7 +73,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopPeriodic() { 
-      drive.driveCartesian(controller.getX(), controller.getY(), controller.getRawAxis(4));
+      drive.driveCartesian(controller.getX()*-1, controller.getY(), controller.getRawAxis(4));
     }
 
     @Override
