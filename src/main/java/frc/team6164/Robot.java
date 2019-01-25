@@ -15,18 +15,18 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 
 public class Robot extends TimedRobot {
-  /*
+  
     Joystick controller;
     SpeedController BL;
     SpeedController BR;
     SpeedController FR;
     SpeedController FL;
     MecanumDrive drive;
-	*/
+	
     @Override
     public void robotInit() {
-    /*  
-        controller = new Joystick(0);
+      
+      controller = new Joystick(0);
 
       BL= new WPI_TalonSRX(1);
       BR= new WPI_TalonSRX(2);
@@ -38,12 +38,12 @@ public class Robot extends TimedRobot {
       drive.setSafetyEnabled(false);
       
       CameraServer.getInstance().startAutomaticCapture("cam0",0);
-      */
+     
     }
 
     @Override
-    public void robotPeriodic() {
-      //super.robotPeriodic();
+    public void robotPeriodic() {       //not sure why this needs to be here but program was complaining
+      super.robotPeriodic();
     }
 
     @Override
@@ -79,7 +79,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopPeriodic() { 
-     // drive.driveCartesian(controller.getX()*-1, controller.getY(), controller.getRawAxis(4));
+      drive.driveCartesian(controller.getX()*-1, controller.getY(), controller.getRawAxis(4));
     }
 
     @Override
