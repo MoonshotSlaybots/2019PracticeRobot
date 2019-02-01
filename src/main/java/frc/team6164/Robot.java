@@ -15,8 +15,9 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 
 public class Robot extends TimedRobot {
-  
+
     Joystick controller;
+    Encoder BRencoder;
     SpeedController BL;
     SpeedController BR;
     SpeedController FR;
@@ -31,10 +32,11 @@ public class Robot extends TimedRobot {
       BL= new WPI_TalonSRX(1);
       BR= new WPI_TalonSRX(2);
 	    FR= new WPI_TalonSRX(3);
-	    FL= new WPI_TalonSRX(4);
+      FL= new WPI_TalonSRX(4);
+      BRencoder=  new Encoder(0, 1, false, Encoder.EncodingType.k4X);
                                 			//the WPI_TalonSRX is a type for wpi (is considered a SpeedController object
                                       //the regular TalonSRX is not meant for wpi use so is not a SpeedController object    
-      drive = new MecanumDrive(FL, BL, FR, BR); 
+      drive = new MecanumDrive(FL, BL, FR, BR);
       drive.setSafetyEnabled(false);
       
       CameraServer.getInstance().startAutomaticCapture("cam0",0);
@@ -55,6 +57,7 @@ public class Robot extends TimedRobot {
     public void autonomousInit() { 
 
     }
+
 
     @Override
     public void teleopInit() { 
@@ -80,10 +83,16 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() { 
       drive.driveCartesian(controller.getX()*-1, controller.getY(), controller.getRawAxis(4));
+      System.out.println(BRencoder.getDistance());
     }
 
     @Override
     public void testPeriodic() { 
+
+    }
+
+    public void autoCode() {
+      
 
     }
 }
